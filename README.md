@@ -1,4 +1,4 @@
-# xueden-cloud-vue3-elementui
+# 基于Vue3.x+TypeScript +Element Plus整合开发的后台权限管理系统
 
 > 视频教程 , **[墨鱼课堂](http://java.goodym.cn/html/1610442125958.html)** 。
 
