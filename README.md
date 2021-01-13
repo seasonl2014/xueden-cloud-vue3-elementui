@@ -1,4 +1,8 @@
 # xueden-cloud-vue3-elementui
+
+> 视频教程 , **[墨鱼课堂](http://java.goodym.cn/html/1610442125958.html)** 。
+
+
 ## 功能
 
 ```
@@ -55,7 +59,6 @@ or
 $ npm install
 ```
 
-> 推荐使用 yarn , **[yarn安装与常用命令](http://liqingsong.cc/article/detail/9)** 。
 
 ### 二、Compiles and hot-reloads for development
 
