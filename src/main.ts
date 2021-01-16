@@ -8,7 +8,7 @@ import '@/assets/css/global.scss';
 
 // 引入 ElementUI
 import ElementPlus from 'element-plus';
-
+import './router/index' // permission control
 // 导入 svg
 import { importAllSvg } from "@/components/IconSvg/index";
 importAllSvg();

@@ -65,9 +65,22 @@ interface RoutesDataItemRedirect extends RoutesDataItemCore{
 }
 export type RoutesDataItem = RoutesDataItemComponent | RoutesDataItemRedirect;
 
-// 返回子组件
+
+/**
+ * 返回子组件
+ * @param view
+ */
 export const loadView = (view: string) => {
-  return () => import(`@/views/${view}`)
+  return () => import('@/views/system/user/list/index.vue')
+  //return () => import(`@/views/${view}`)
+}
+
+/**
+ * 返回BlankLayout组件
+ * @param view
+ */
+export const loadBlankLayoutView = () => {
+  return () => import(`@/layouts/BlankLayout.vue`)
 }
 
 /**
@@ -79,7 +92,6 @@ export const getRouteItem = (pathname: string, routesData: RoutesDataItem[]): Ro
   let item: RoutesDataItem = { title: '', path: '', redirect: '', roles: [] };
   for (let index = 0, len = routesData.length; index < len; index += 1) {
     const element = routesData[index];
-    // console.info("函数getRouteItem",element)
     if (element.path === pathname) {
       item = element;
       break;
@@ -125,7 +137,6 @@ export const formatRoutePathTheParents = (pathname: string, separator = '/'): st
   }
 
   const pathArr = pathname.split(separator);
-  // console.info("获取父path formatRoutePathTheParents",pathArr)
   for (let index = 1, len = pathArr.length - 1; index < len; index += 1) {
     arr.push(pathArr.slice(0, index + 1).join(separator));
   }
@@ -143,10 +154,10 @@ export const setRoutePathForParent = (pathname: string, parentPath = '/', headSt
   if (isExternal(pathname)) {
     return pathname;
   }
-  // console.info("根据父path 设置当前项 path setRoutePathForParent",`${parentPath}/${pathname}`)
+
   return pathname.substr(0, headStart.length) === headStart
-    ? pathname
-    : `${parentPath}/${pathname}`;
+      ? pathname
+      : `${parentPath}/${pathname}`;
 };
 
 /**
@@ -164,7 +175,7 @@ export const getPathsTheRoutes = ( pathname: string[], routesData: RoutesDataIte
       routeItem.push(item);
     }
   }
-  // console.info("根据路由 pathname 数组 - 返回对应的 route 数组",routeItem)
+
   return routeItem;
 };
 
@@ -202,7 +213,6 @@ export const getRouteBelongTopMenu = (route: RoutesDataItem): string => {
   if (route.belongTopMenu) {
     return route.belongTopMenu;
   }
-  // console.info("获取当前路由对应的顶部菜单path",`/${route.path.split('/')[1]}`)
   return `/${route.path.split('/')[1]}`;
 };
 
@@ -213,14 +223,11 @@ export const getRouteBelongTopMenu = (route: RoutesDataItem): string => {
  * @param parentPath 父path - 默认 /
  * @param headStart 路由起始头 - 默认 /
  */
-export const vueRoutes = (routesData: RoutesDataItem[], parentPath = '', headStart = '/'): RoutesDataItem[] => {
+export const vueRoutes = (routesData: RoutesDataItem[], parentPath = '/', headStart = '/'): RoutesDataItem[] => {
   return routesData.map(item => {
-
-
     const { children, ...other } = item;
     const itemChildren = children || [];
     const newItem: RoutesDataItem = { ...other };
-
     newItem.path = setRoutePathForParent(newItem.path, parentPath, headStart);
 
     if (item.children) {
@@ -228,27 +235,9 @@ export const vueRoutes = (routesData: RoutesDataItem[], parentPath = '', headSta
         ...vueRoutes(itemChildren, newItem.path, headStart),
       ];
     }
-
-    if(newItem.pid===null){
-      if(newItem.children){
-        newItem.redirect = newItem.children[0].path
-      }
-      if(newItem.component===null){
-
-        newItem.component = BlankLayout
-      }
-       //console.info(`格式化返回 vue 路由,${newItem.pid} 主要处理特殊情况${newItem.title}-${newItem.redirect}`,newItem.component)
-    }else {
-      const component = newItem.component
-      if (typeof component === "string") {
-        newItem.component = loadView(component)
-      }
-    }
-
     return newItem;
   });
 };
-
 
 
 
