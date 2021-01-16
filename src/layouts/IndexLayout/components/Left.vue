@@ -2,8 +2,8 @@
     <div id="indexlayout-left" :class="{'narrow': collapsed}">
         <div class="indexlayout-left-logo">
             <router-link to="/" class="logo-url">
-                <img v-if="collapsed" alt="Vue logo" src="../../../assets/images/logo.png" width="30">
-                <h3 v-else class="logo-title">后台管理系统</h3>
+                <img  alt="Vue logo" src="../../../assets/images/logo.png" width="30">
+                <h3  class="logo-title">后台管理系统</h3>
             </router-link>
         </div>
         <div class="indexlayout-left-menu">
@@ -74,7 +74,7 @@ export default defineComponent({
       overflow: hidden;
       .logo-title {
         display: inline-block;
-        margin: 0;
+        margin: 0 12px;
         font-size: 16px;
         font-family: Roboto, sans-serif;
         color: #c0c4cc;

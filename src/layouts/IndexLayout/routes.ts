@@ -1,5 +1,4 @@
 import { RoutesDataItem } from "@/utils/routes";
-import BlankLayout from '@/layouts/BlankLayout.vue';
 
 
 
@@ -9,13 +8,19 @@ const IndexLayoutRoutes: Array<RoutesDataItem> = [
     title: 'index-layout.menu.home',
     path: '/home',
     redirect: '/home/workplace',
-    component: BlankLayout,
+    component: ()=> import('@/layouts/BlankLayout.vue'),
     children: [
       {
         icon: 'control',
         title: 'index-layout.menu.home.workplace',
         path: 'workplace',
         component: ()=> import('@/views/home/index.vue')
+      },
+      {
+        icon: 'detail',
+        title: 'index-layout.menu.roles.all',
+        path: 'all',
+        component: ()=> import('@/views/roles/all/index.vue'),
       },
       {
         icon: 'detail',
@@ -27,20 +32,13 @@ const IndexLayoutRoutes: Array<RoutesDataItem> = [
     ],
   },
 
-  {
+/*  {
     icon: 'page',
     title: 'index-layout.menu.system',
     path: '/system',
-    redirect: '/system/list',
-    component: BlankLayout,
+    redirect: '/system/user',
+    component: ()=> import('@/layouts/BlankLayout.vue'),
     children: [
-      {
-        icon: 'list',
-        title: 'index-layout.menu.system.list',
-        path: 'list',
-        redirect: '/system/list/user',
-        component: BlankLayout,
-        children: [
           {
             title: 'index-layout.menu.system.list.user',
             path: 'user',
@@ -61,13 +59,12 @@ const IndexLayoutRoutes: Array<RoutesDataItem> = [
             path: 'log',
             component: ()=> import('@/views/system/log/list/index.vue'),
           },
-        ],
-      },
+
     ],
-  },
+  },*/
 
 
-  /*{
+ /* {
     icon: 'permissions',
     title: 'index-layout.menu.roles',
     path: '/roles',

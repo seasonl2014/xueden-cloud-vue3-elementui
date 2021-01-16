@@ -50,7 +50,6 @@ import {
 } from '@/utils/routes';
 import { mergeUnique as ArrayMergeUnique } from '@/utils/array';
 import useTitle from '@/composables/useTitle';
-import IndexLayoutRoutes from './routes';
 import Permission from '@/components/Permission/index.vue';
 import Left from './components/Left.vue';
 import RightTop from './components/RightTop.vue';
@@ -59,6 +58,7 @@ import Settings from "./components/Settings.vue";
 import { ResponseData } from '@/utils/request';
 import {TableListItem} from "@/views/system/menu/list/data";
 import { buildMenus } from "@/services/user";
+import {getUserMenuTreeKey} from "@/utils/menudata";
 interface IndexLayoutSetupData {
   collapsed: boolean;
   toggleCollapsed: () => void;
@@ -80,7 +80,7 @@ export default defineComponent({
         RightFooter,
         Settings
     },
-  setup: function (): IndexLayoutSetupData {
+  setup:  function (): IndexLayoutSetupData {
     const store = useStore<{
       global: GlobalStateType;
       user: UserStateType;
@@ -88,31 +88,10 @@ export default defineComponent({
 
     const route = useRoute();
 
-    const userMenuData = computed<RoutesDataItem[]>(() => store.state.user.currentUserMenu);
-
-    /*const userMenuData = computed<RoutesDataItem[]>({
-        get: () => store.state.user.currentUserMenu,
-        set: () => {
-          buildMenus().then(res => {
-            console.info('res', res.data)
-            userMenuData.value = res.data
-            store.commit('user/saveCurrentUserMenu', res.data || {});
-          })
-        }
-    });*/
-
-/*    if(userMenuData.value.length===0){
-      buildMenus().then(res => {
-        console.info('res', res.data)
-        userMenuData.value = res.data
-        store.commit('user/saveCurrentUserMenu', res.data || {});
-      })
-      console.info("计算属性userMenuData没有值")
-
-    }*/
-
-    const menuData: RoutesDataItem[] = vueRoutes(IndexLayoutRoutes);
-
+     const userMenu = computed<RoutesDataItem[] >(() => store.state.user.currentUserMenu);
+     console.info("store.state.user.currentUserMenu的值是：",store.state.user.currentUserMenu)
+     const menuData: RoutesDataItem[] = vueRoutes(userMenu.value);
+    console.info("menuData的值是：",menuData)
     // 当前路由 item
     const routeItem = computed<RoutesDataItem>(() => getRouteItem(route.path, menuData));
 
@@ -148,17 +127,9 @@ export default defineComponent({
     // 设置title
     useTitle(routeItem);
 
-   /* const getCurrentUserMenu = async () => {
-      let currentUserMenu: any[] = [];
-      const response: ResponseData = await store.dispatch('user/fetchCurrentUserMenu');
-      const {data, success} = response;
-      currentUserMenu = IndexLayoutRoutes.concat(data)
-      store.commit('user/saveCurrentUserMenu', currentUserMenu || {});
-    }*/
-
-    onMounted(() => {
-      // getCurrentUserMenu()
-    })
+    /*onMounted(() => {
+      console.info("看看能不能获取到",getUserMenuTreeKey())
+    })*/
 
     return {
       collapsed: collapsed as unknown as boolean,
