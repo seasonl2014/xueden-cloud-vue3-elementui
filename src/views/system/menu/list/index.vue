@@ -193,7 +193,7 @@ export default defineComponent({
       const list = computed<TableListItem[]>(() => store.state.MenuListTable.tableData.list);
       // 树形菜单数据
        const menusData = computed<TableListItem[]>(() => store.state.MenuListTable.menuData.menuList);
-       console.info("menusData：",menusData.value)
+       // console.info("menusData：",menusData.value)
         // 新增弹框 - visible
         const createFormVisible = ref<boolean>(false);
         const setCreateFormVisible = (val: boolean) => {

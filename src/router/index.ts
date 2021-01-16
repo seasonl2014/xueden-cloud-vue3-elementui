@@ -31,7 +31,7 @@ export const loadMenus = (next: NavigationGuardNext, to: RouteLocationNormalized
 router.beforeEach((to, from, next) => {
     // 获取本地token
     getToken().then(r => {
-        console.info("当前token值是", r)
+        // console.info("当前token值是", r)
         if (r === null) {
             if (to.path == '/user/login') { // 防止造成死循环
                 next();
