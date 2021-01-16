@@ -1,3 +1,5 @@
+import {RoutesDataItem} from "@/utils/routes";
+
 /**
  * 站点配置
  * @author LiQingSong
@@ -38,6 +40,16 @@ export interface SettingsType {
      */
     iconfontUrl: string[];
 
+    /**
+     * 用户树形菜单存储的 Key值
+     */
+    userMenusKey: string;
+
+    /**
+     * 当前用户所具有的树形菜单
+     */
+    userMenusTree: RoutesDataItem[];
+
 }
 
 const settings: SettingsType = {
@@ -52,6 +64,8 @@ const settings: SettingsType = {
         '/code', // 获取验证码
     ],
     iconfontUrl: [],
+    userMenusKey: 'user_menu_vue_token',
+    userMenusTree: [],
 };
 
 export default settings;
