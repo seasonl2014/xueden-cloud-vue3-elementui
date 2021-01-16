@@ -67,7 +67,7 @@ export const  getLeftMenuChildren = (array: any) => {
       icon: arr.svgIcon,
       title: `${ arr.title }`,
       path: `${ arr.path }`,
-      component: ()=> import('@/views/system/menu/list/index.vue'),
+      component: ()=> import(`@/views/${arr.component}`),
     }
     menuChildren.push(child);
   }
@@ -98,7 +98,6 @@ export function generateLeftAndTopMenusTree<T>(dataMenus: Array<T>): Array<Route
     }
 
   }
-  // const userMenu =IndexLayoutRoutes.concat(menusList)
   return menusList;
 }
 

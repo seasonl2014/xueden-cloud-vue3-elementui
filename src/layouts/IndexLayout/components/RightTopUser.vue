@@ -42,6 +42,7 @@ export default defineComponent({
 
             if (command === 'logout') {
                 const res: boolean = await store.dispatch('user/logout');
+                 console.info("res:",res)
                 if(res === true) {
                     router.replace({
                         path: '/user/login',

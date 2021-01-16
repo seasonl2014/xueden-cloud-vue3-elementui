@@ -267,7 +267,7 @@ export const hasPermissionRouteRoles = (userRoles: string[], roles?: string | st
 };
 
 /**
- * 根据 route.roles 判断当前用户是否有权限
+ * 根据 route.role 判断当前用户是否有权限
  * @param roles 用户的权限
  * @param route 当前路由
  */
@@ -278,7 +278,7 @@ export const hasPermission = (roles: string[], route: RoutesDataItem): boolean =
 
   if (route.roles) {
     return route.roles.some(role => roles.includes(role));
-    //return roles.some(role => route.roles?.includes(role));
+    //return role.some(role => route.role?.includes(role));
   }
 
   return true;

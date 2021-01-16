@@ -26,7 +26,7 @@ export default defineComponent({
         }
     },
     setup(props, { emit }): TypeSelectSetupData {
-       console.info("select传过来的值props:",props)
+       // console.info("select传过来的值props:",props)
       // 定义基础数据
       const state = reactive({
         options: [{

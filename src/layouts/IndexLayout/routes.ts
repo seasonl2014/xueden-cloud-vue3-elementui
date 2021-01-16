@@ -45,9 +45,9 @@ const IndexLayoutRoutes: Array<RoutesDataItem> = [
             component: ()=> import('@/views/system/user/list/index.vue'),
           },
           {
-            title: 'index-layout.menu.system.list.roles',
-            path: 'roles',
-            component: ()=> import('@/views/system/roles/list/index.vue'),
+            title: 'index-layout.menu.system.list.role',
+            path: 'role',
+            component: ()=> import('@/views/system/role/list/index.vue'),
           },
           {
             title: 'index-layout.menu.system.list.menu',
@@ -66,30 +66,30 @@ const IndexLayoutRoutes: Array<RoutesDataItem> = [
 
  /* {
     icon: 'permissions',
-    title: 'index-layout.menu.roles',
-    path: '/roles',
-    redirect: '/roles/all',
+    title: 'index-layout.menu.role',
+    path: '/role',
+    redirect: '/role/all',
     component: BlankLayout,
     children: [
       {
         icon: 'detail',
-        title: 'index-layout.menu.roles.all',
+        title: 'index-layout.menu.role.all',
         path: 'all',
-        component: ()=> import('@/views/roles/all/index.vue'),
+        component: ()=> import('@/views/role/all/index.vue'),
       },
       {
         icon: 'detail',
-        roles: ['user'],
-        title: 'index-layout.menu.roles.user',
+        role: ['user'],
+        title: 'index-layout.menu.role.user',
         path: 'user',
-        component: ()=> import('@/views/roles/user/index.vue'),
+        component: ()=> import('@/views/role/user/index.vue'),
       },
       {
         icon: 'detail',
-        roles: ['test'],
-        title: 'index-layout.menu.roles.test',
+        role: ['test'],
+        title: 'index-layout.menu.role.test',
         path: 'test',
-        component: ()=> import('@/views/roles/test/index.vue'),
+        component: ()=> import('@/views/role/test/index.vue'),
       },
     ],
   },*/

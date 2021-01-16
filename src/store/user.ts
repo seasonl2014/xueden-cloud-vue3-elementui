@@ -64,7 +64,6 @@ const StoreModel: ModuleType = {
     },
     saveCurrentUserMenu(state, payload){
       state.currentUserMenu = payload
-      console.info("保存菜单数据到vuex+saveCurrentUserMenu",state.currentUserMenu)
     },
     saveMessage(state, payload) {
       state.message = payload;
@@ -107,7 +106,6 @@ const StoreModel: ModuleType = {
     async logout({ commit }) {
       try {
         await removeToken();
-        commit('saveCurrentUser', { ...initState.currentUser });
         return true;
       } catch (error) {
         return false;

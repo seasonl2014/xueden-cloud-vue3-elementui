@@ -230,7 +230,6 @@ export default defineComponent({
         // 获取数据
         const loading = ref<boolean>(true);
         const getList = async (current: number): Promise<void> => {
-          console.info("看看分页是否进入到这里",current)
             loading.value = true;
             await store.dispatch('ListSearchTable/queryTableData', {
                 per: pagination.value.pageSize,
