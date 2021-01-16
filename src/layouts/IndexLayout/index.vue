@@ -55,10 +55,7 @@ import Left from './components/Left.vue';
 import RightTop from './components/RightTop.vue';
 import RightFooter from './components/RightFooter.vue';
 import Settings from "./components/Settings.vue";
-import { ResponseData } from '@/utils/request';
-import {TableListItem} from "@/views/system/menu/list/data";
-import { buildMenus } from "@/services/user";
-import {getUserMenuTreeKey} from "@/utils/menudata";
+
 interface IndexLayoutSetupData {
   collapsed: boolean;
   toggleCollapsed: () => void;
@@ -126,10 +123,6 @@ export default defineComponent({
 
     // 设置title
     useTitle(routeItem);
-
-    /*onMounted(() => {
-      console.info("看看能不能获取到",getUserMenuTreeKey())
-    })*/
 
     return {
       collapsed: collapsed as unknown as boolean,

@@ -5,7 +5,6 @@
  * @author LiQingSong
  */
 
-import settings from '@/config/settings';
 import {MenuTreeDataType} from "@/views/system/menu/list/data";
 import {RoutesDataItem} from "@/utils/routes";
 import IndexLayoutRoutes from "@/layouts/IndexLayout/routes";
