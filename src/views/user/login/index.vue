@@ -42,7 +42,7 @@
 </template>
 <script lang="ts">
 import {computed, defineComponent, reactive, ref, watch, Ref, onMounted} from "vue";
-import { useRouter } from 'vue-router';
+import { useRouter, RouteRecordRaw } from 'vue-router';
 import { useStore } from 'vuex';
 import { useI18n } from "vue-i18n";
 import { ElForm, ElMessage } from 'element-plus';
@@ -53,6 +53,7 @@ import {buildMenus} from "@/services/user";
 import store from "@/config/store";
 import {generateLeftAndTopMenusTree} from "@/utils/menudata";
 import {RoutesDataItem} from "@/utils/routes";
+import asyncRouter from "@/layouts/IndexLayout/asyncRouter";
 
 interface UserLoginSetupData {
     t: Function;
@@ -122,9 +123,11 @@ export default defineComponent({
                     const res: boolean = await store.dispatch('userlogin/login',modelRef);
                     if (res === true) {
                       buildMenus().then(res => {
-                        const menusList: Array<RoutesDataItem> = generateLeftAndTopMenusTree(res.data)
-                        console.info('封装后的数据返回到登录页面:', menusList)
+                        const menusList: Array<RoutesDataItem > = generateLeftAndTopMenusTree(res.data)
                         store.commit('user/saveCurrentUserMenu', menusList || {});
+                        // const asyncRouter: Array<RouteRecordRaw>  = menusList
+                        console.info("静态路由:",router.getRoutes())
+                        //router.addRoute(asyncRouter) // 动态添加可访问路由表
                       })
                         ElMessage.success(t('page.user.login.form.login-success'));
                         const { redirect, ...query } = currentRoute.value.query;

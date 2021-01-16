@@ -55,6 +55,7 @@ import Left from './components/Left.vue';
 import RightTop from './components/RightTop.vue';
 import RightFooter from './components/RightFooter.vue';
 import Settings from "./components/Settings.vue";
+import IndexLayoutRoutes from "@/layouts/IndexLayout/routes";
 
 interface IndexLayoutSetupData {
   collapsed: boolean;
@@ -84,11 +85,10 @@ export default defineComponent({
     }>();
 
     const route = useRoute();
-
-     const userMenu = computed<RoutesDataItem[] >(() => store.state.user.currentUserMenu);
-     console.info("store.state.user.currentUserMenu的值是：",store.state.user.currentUserMenu)
-     const menuData: RoutesDataItem[] = vueRoutes(userMenu.value);
-    console.info("menuData的值是：",menuData)
+    const currentUserMenu = computed<RoutesDataItem[] >(() => store.state.user.currentUserMenu);
+    const userMenu: RoutesDataItem[]=IndexLayoutRoutes.concat(currentUserMenu.value)
+     const menuData: RoutesDataItem[] = vueRoutes(userMenu);
+     //console.info("menuData的值是：",menuData)
     // 当前路由 item
     const routeItem = computed<RoutesDataItem>(() => getRouteItem(route.path, menuData));
 

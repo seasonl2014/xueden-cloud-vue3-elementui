@@ -3,7 +3,7 @@
  * @author LiQingSong
  */
 import { Component } from 'vue';
-import { RouteLocation, RouteLocationRaw} from 'vue-router';
+import { RouteLocation, RouteLocationRaw, RouteRecordRaw} from 'vue-router';
 import { isExternal } from './validate';
 import BlankLayout from '@/layouts/BlankLayout.vue';
 /**
@@ -63,7 +63,7 @@ interface RoutesDataItemRedirect extends RoutesDataItemCore{
   // 组件页面
   component?: Component | Promise<Component>;
 }
-export type RoutesDataItem = RoutesDataItemComponent | RoutesDataItemRedirect;
+export type RoutesDataItem = RoutesDataItemComponent | RoutesDataItemRedirect ;
 
 
 /**

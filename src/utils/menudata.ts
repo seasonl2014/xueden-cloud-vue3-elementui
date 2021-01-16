@@ -8,6 +8,8 @@
 import {MenuTreeDataType} from "@/views/system/menu/list/data";
 import {RoutesDataItem} from "@/utils/routes";
 import IndexLayoutRoutes from "@/layouts/IndexLayout/routes";
+import router from "@/config/routes";
+import { RouteRecordRaw } from 'vue-router';
 
 
 // 生成用户所具有的树形菜单
@@ -60,7 +62,7 @@ export function generateMenusTree<T>(dataMenus: Array<T>): Array<MenuTreeDataTyp
 // 获取左边子菜单函数
 export const  getLeftMenuChildren = (array: any) => {
   const menuChildren: any = [];
- /* for (const arr of array) {//循环获取子节点
+  for (const arr of array) {//循环获取子节点
     const child: RoutesDataItem= {
       icon: arr.svgIcon,
       title: `${ arr.title }`,
@@ -68,15 +70,8 @@ export const  getLeftMenuChildren = (array: any) => {
       component: ()=> import('@/views/system/menu/list/index.vue'),
     }
     menuChildren.push(child);
-  }*/
-
-  const child: RoutesDataItem= {
-    icon: 'permissions',
-    title: 'index-layout.menu.roles',
-    path: 'all',
-    component: ()=> import('@/views/roles/all/index.vue')
   }
-  menuChildren.push(child);
+
   return menuChildren;
 }
 
@@ -86,17 +81,16 @@ export function generateLeftAndTopMenusTree<T>(dataMenus: Array<T>): Array<Route
   for (let index = 0, len = dataMenus.length; index < len; index += 1) {
     const menu: any =  dataMenus[index]
     if(menu.pid===null){ //判断是否为顶层节点
-      const parentMenu: RoutesDataItem= {
+      const parentMenu: RoutesDataItem | RouteRecordRaw= {
         icon: `${ menu.svgIcon }`,
         title: menu.title,
         path: `/${ menu.path }`,
         component: ()=> import('@/layouts/BlankLayout.vue'),
-        //redirect: '/system/workplace',
         redirect: '/home/workplace'
       }
 
       if(menu.children.length>0){
-        // parentMenu.redirect = "/"+menu.path+"/"+menu.children[0].path
+        parentMenu.redirect = "/"+menu.path+"/"+menu.children[0].path
         parentMenu.children = getLeftMenuChildren(menu.children)
 
       }
@@ -104,7 +98,7 @@ export function generateLeftAndTopMenusTree<T>(dataMenus: Array<T>): Array<Route
     }
 
   }
-  const userMenu =IndexLayoutRoutes.concat(menusList)
-  return userMenu;
+  // const userMenu =IndexLayoutRoutes.concat(menusList)
+  return menusList;
 }
 
