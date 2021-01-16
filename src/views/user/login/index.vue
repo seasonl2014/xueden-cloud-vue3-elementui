@@ -51,6 +51,8 @@ import { StateType as UserLoginStateType } from './store';
 import {ResponseData} from "@/utils/request";
 import {buildMenus} from "@/services/user";
 import store from "@/config/store";
+import {generateLeftAndTopMenusTree, setSessionStorageUserMenuTreeKey} from "@/utils/menudata";
+import {RoutesDataItem} from "@/utils/routes";
 
 interface UserLoginSetupData {
     t: Function;
@@ -80,7 +82,7 @@ export default defineComponent({
         // 表单值
         const modelRef = reactive<LoginParamsType>({
             username: 'admin',
-            password: 'e4d89cba',
+            password: '123456',
             code: '',
             uuid: ''
         });
@@ -120,8 +122,10 @@ export default defineComponent({
                     const res: boolean = await store.dispatch('userlogin/login',modelRef);
                     if (res === true) {
                       buildMenus().then(res => {
-                        console.info('res33333333333:', res.data)
-                        store.commit('user/saveCurrentUserMenu', res.data || {});
+                        const menusList: Array<RoutesDataItem> = generateLeftAndTopMenusTree(res.data)
+                        console.info('封装后的数据返回到登录页面:', menusList)
+                        store.commit('user/saveCurrentUserMenu', menusList || {});
+                        // setSessionStorageUserMenuTreeKey(menusList)
                       })
                         ElMessage.success(t('page.user.login.form.login-success'));
                         const { redirect, ...query } = currentRoute.value.query;

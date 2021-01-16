@@ -3,7 +3,6 @@ import { StoreModuleType } from "@/utils/store";
 import { ResponseData } from '@/utils/request';
 import { queryCurrent, queryMessage,queryCurrentUserMenu } from "@/services/user";
 import { removeToken } from "@/utils/localToken";
-import IndexLayoutRoutes from "@/layouts/IndexLayout/routes";
 import {RoutesDataItem} from "@/utils/routes";
 
 export interface CurrentUser {
@@ -64,7 +63,6 @@ const StoreModel: ModuleType = {
       }
     },
     saveCurrentUserMenu(state, payload){
-      //state.currentUserMenu = IndexLayoutRoutes.concat(payload)
       state.currentUserMenu = payload
       console.info("保存菜单数据到vuex+saveCurrentUserMenu",state.currentUserMenu)
     },

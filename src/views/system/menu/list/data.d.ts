@@ -40,3 +40,13 @@ export interface MenuTreeDataType {
   children?: any[];
 }
 
+export interface LeftAndTopMenuTreeDataType {
+  children?: any[];
+  icon: string;
+  title: string;
+  path: string;
+  redirect?: string;
+  component?: Component | Promise<Component>;
+
+}
+
