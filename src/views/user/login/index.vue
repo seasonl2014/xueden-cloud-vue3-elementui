@@ -191,7 +191,7 @@ export default defineComponent({
     margin-top: 0;
     margin-bottom: 30px;
     text-align: center;
-    color: #ffffff;
+    color: #986a46;
     /* background-image:-webkit-linear-gradient(right,#FFFFFF,#009688, #FFFFFF);
         -webkit-background-clip: text;
         -webkit-text-fill-color:transparent; */

@@ -40,11 +40,12 @@ router.beforeEach((to, from, next) => {
                 next(`/user/login?redirect=${to.path}`) // 否则全部重定向到登录页
             }
         } else {
-            if (to.path === '/login') {
+            if (to.path === '/user/login') {
                 return next()
             } else {
                 if (UserModel.state.currentUserMenu.length === 0) {
                     buildMenus().then((res: { data: unknown[] }) => {
+                       /* console.info("能否进入到这里",res)*/
                         const menusList: Array<RoutesDataItem> = generateLeftAndTopMenusTree(res.data)
                         UserModel.state.currentUserMenu = menusList
                         loadMenus(next, to, menusList)

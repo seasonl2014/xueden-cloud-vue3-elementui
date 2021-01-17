@@ -44,18 +44,19 @@ const errorHandler = (error: any) => {
         // 自定义错误
         const { config, data } = response;
         const { url, baseURL} = config;
-        const { code, msg } = data;
+        const { code, msg,message } = data;
         const reqUrl = url.split("?")[0].replace(baseURL, '');
         const noVerifyBool = settings.ajaxResponseNoVerifyUrl.includes(reqUrl);
         if (!noVerifyBool) {
             ElNotification({
                 type: 'error',
                 title: `提示`,
-                message: customCodeMessage[code] || msg || 'Error',
+                message: customCodeMessage[code] || msg || message || 'Error',
             });
 
-            if (code === 10002) {
+            if (code === 10002|| code === 500) {
                 router.replace('/user/login');
+
             }
         }
     } else if (message === 'CancelToken') {

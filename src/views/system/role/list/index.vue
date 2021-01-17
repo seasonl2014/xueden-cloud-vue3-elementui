@@ -56,15 +56,6 @@
                 </template>
               </el-table-column>
 
-                <el-table-column
-                    label="创建人"
-                    prop="createId">
-                    <template #default="{row}">
-                        <el-tag v-if="row.createUser !== null" type="success">{{row.createUser}}</el-tag>
-                        <el-tag v-else type="warning">未知</el-tag>
-                    </template>
-                </el-table-column>
-
               <el-table-column
                   label="创建时间"
                   prop="createDate">
@@ -232,7 +223,7 @@ export default defineComponent({
 
         // 获取菜单数据
       const menus = computed<object[]>(() => store.state.ListTable.menusData.menusList);
-      //console.info("index组件页面获取封装后的菜单数据：",menus.value)
+      console.info("index组件页面获取封装后的菜单数据：",menus.value)
       const getMenusList = async (): Promise<void> => {
         await store.dispatch('ListTable/queryMenusTableData', {});
       }

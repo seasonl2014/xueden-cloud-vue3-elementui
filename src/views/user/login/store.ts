@@ -67,7 +67,7 @@ const StoreModel: ModuleType = {
                 resultData = response;
                 return resultData;
             } catch (error) {
-                console.info("能否进入到这里3:",error)
+                // console.info("能否进入到这里3:",error)
 
             }
             return null;

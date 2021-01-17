@@ -108,7 +108,6 @@ const StoreModel: ModuleType = {
             state.menusData = payload;
         },
         setMenusIdsData(state, payload) {
-             console.info("接收到菜单数据payload：",payload)
             state.menusData.menuIds = payload.menuIds;
         },
     },
@@ -143,7 +142,7 @@ const StoreModel: ModuleType = {
 
                 menusList = generateMenusTree(data)
 
-                //console.info("封装后的菜单数据：",menusList)
+                // console.info("封装后的菜单数据：",menusList)
                 commit('setMenusData',{
                     ...initState.menusData,
                     menusList
