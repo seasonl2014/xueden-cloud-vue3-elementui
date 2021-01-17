@@ -1,62 +1,47 @@
 import request from '@/utils/request';
-import { TableListQueryParams } from './data.d';
 
-export async function dailynewArticles(): Promise<any> {
+
+export async function dailynewUsers(): Promise<any> {
   return request({
-      url: '/home/articles/dailynew',
+      url: '/system/user/list',
       method: 'get'
   });
 }
 
-export async function weeknewWorks(): Promise<any> {
+export async function dailynewRole(): Promise<any> {
   return request({
-      url: '/home/works/weeknew',
+      url: '/system/role/list',
+      method: 'post'
+  });
+}
+
+export async function dailynewMenu(): Promise<any> {
+  return request({
+      url: '/system/menu/list',
       method: 'get'
   });
 }
 
-export async function monthnewTopics(): Promise<any> {
-  return request({
-      url: '/home/topics/monthnew',
-      method: 'get'
-  });
+export async function dailynewLogs(): Promise<any> {
+    return request({
+        url: '/system/log/list',
+        method: 'post'
+    });
 }
 
 export async function annualnewLinks(): Promise<any> {
   return request({
-      url: '/home/links/annualnew',
+      url: '/system/log/pvs',
       method: 'get'
   });
 }
 
-export async function hotSearchQueryList(params?: TableListQueryParams): Promise<any> {
+export async function pvprovinceQueryList(): Promise<any> {
   return request({
-    url: '/home/searchs/keywords',
-    method: 'get',
-    params,
+    url: '/system/log/pvprovince',
+    method: 'get'
   });
 }
 
-export async function hotTagsQueryList(params?: TableListQueryParams): Promise<any> {
-  return request({
-    url: '/home/tags',
-    method: 'get',
-    params,
-  });
-}
 
-export async function articleHitQueryList(params?: TableListQueryParams): Promise<any> {
-  return request({
-    url: '/home/articles',
-    method: 'get',
-    params,
-  });
-}
 
-export async function worksHitQueryList(params?: TableListQueryParams): Promise<any> {
-  return request({
-    url: '/home/works',
-    method: 'get',
-    params,
-  });
-}

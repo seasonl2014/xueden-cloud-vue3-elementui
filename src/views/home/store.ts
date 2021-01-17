@@ -2,129 +2,75 @@ import { Mutation, Action } from 'vuex';
 import { StoreModuleType } from "@/utils/store";
 import { ResponseData } from '@/utils/request';
 import {
-    dailynewArticles,
-    weeknewWorks,
-    monthnewTopics,
+    dailynewUsers,
+    dailynewRole,
+    dailynewMenu,
     annualnewLinks,
-    hotSearchQueryList,
-    hotTagsQueryList,
-    articleHitQueryList,
-    worksHitQueryList,
-  } from './service';
+    dailynewLogs,
+    pvprovinceQueryList
+} from './service';
 import {
-    ArticleChartDataType,
-    WorksChartDataType,
-    TopicsChartDataType,
+    UserChartDataType,
+    RoleChartDataType,
+    MenuChartDataType,
     LinksChartDataType,
-    HotSearchDataType,
-    HotTagsDataType,
-    ArticleHitDataType,
-    WorksHitDataType,
-    TableListQueryParams
-  } from './data.d';
+    MapChartDataType,
+    LogsChartDataType,
+} from './data.d';
 
 export interface StateType {
-  articleChartData: ArticleChartDataType;
-  worksChartData: WorksChartDataType;
-  topicsChartData: TopicsChartDataType;
+  userChartData: UserChartDataType;
+  roleChartData: RoleChartDataType;
+  menuChartData: MenuChartDataType;
+  logsChartData: LogsChartDataType;
   linksChartData: LinksChartDataType;
-  hotSearchData: HotSearchDataType;
-  hotTagsData: HotTagsDataType;
-  articleHitData: ArticleHitDataType;
-  worksHitData: WorksHitDataType;
+  mapChartData: MapChartDataType;
+
 }
 
 export interface ModuleType extends StoreModuleType<StateType> {
     state: StateType;
     mutations: {
-        setArticleChartData: Mutation<StateType>;
-        setWorksChartData: Mutation<StateType>;
-        setTopicsChartData: Mutation<StateType>;
+        setUserChartData: Mutation<StateType>;
+        setRoleChartData: Mutation<StateType>;
+        setMenuChartData: Mutation<StateType>;
+        setLogsChartData: Mutation<StateType>;
         setLinksChartData: Mutation<StateType>;
-        setHotSearchData: Mutation<StateType>;
-        setHotTagsData: Mutation<StateType>;
-        setArticleHitData: Mutation<StateType>;
-        setWorksHitData: Mutation<StateType>;
+        setMapChartData: Mutation<StateType>;
     };
     actions: {
-        queryArticleChartData: Action<StateType, StateType>;
-        queryWorksChartData: Action<StateType, StateType>;
-        queryTopicsChartData: Action<StateType, StateType>;
+        queryUserChartData: Action<StateType, StateType>;
+        queryRoleChartData: Action<StateType, StateType>;
+        queryMenuChartData: Action<StateType, StateType>;
+        queryLogsChartData: Action<StateType, StateType>;
         queryLinksChartData: Action<StateType, StateType>;
-        queryHotSearchData: Action<StateType, StateType>;
-        queryHotTagsData: Action<StateType, StateType>;
-        queryArticleHitData: Action<StateType, StateType>;
-        queryWorksHitData: Action<StateType, StateType>;
+        queryMapChartData: Action<StateType, StateType>;
     };
 }
 
 const initState: StateType = {
-    articleChartData: {
-      total: 0,
-      num: 0,
-      week: 0,
-      day: 0,
+    userChartData: {
+       count: 0
     },
-    worksChartData: {
-      total: 0,
-      num: 0,
-      chart: {
-        day: [],
-        num: [],
-      },
+    roleChartData: {
+      count: 0
     },
-    topicsChartData: {
-      total: 0,
-      num: 0,
-      chart: {
-        day: [],
-        num: [],
-      },
+    menuChartData: {
+      count: 0,
+    },
+    logsChartData: {
+        count: 0,
     },
     linksChartData: {
-      total: 0,
-      num: 0,
       chart: {
         day: [],
         num: [],
       },
     },
-    hotSearchData: {
-        list: [],
-        pagination: {
-        total: 0,
-        current: 1,
-        pageSize: 5,
-        showSizeChanger: false,
+    mapChartData: {
+        pv: []
         },
-    },
-    hotTagsData: {
-        list: [],
-        pagination: {
-        total: 0,
-        current: 1,
-        pageSize: 5,
-        showSizeChanger: false,
-        },
-    },
-    articleHitData: {
-        list: [],
-        pagination: {
-        total: 0,
-        current: 1,
-        pageSize: 5,
-        showSizeChanger: false,
-        },
-    },
-    worksHitData: {
-        list: [],
-        pagination: {
-        total: 0,
-        current: 1,
-        pageSize: 5,
-        showSizeChanger: false,
-        },
-    },
+
 };
 
 const StoreModel: ModuleType = {
@@ -134,160 +80,116 @@ const StoreModel: ModuleType = {
         ...initState
     },
     mutations: {
-        setArticleChartData(state, payload) {
-            state.articleChartData = payload;
+        setUserChartData(state, payload) {
+            state.userChartData = payload;
         },
-        setWorksChartData(state, payload) {
-            state.worksChartData = payload;
+        setRoleChartData(state, payload) {
+            state.roleChartData = payload;
         },
-        setTopicsChartData(state, payload) {
-            state.topicsChartData = payload;
+        setMenuChartData(state, payload) {
+            state.menuChartData = payload;
+        },
+        setLogsChartData(state, payload) {
+            state.logsChartData = payload;
         },
         setLinksChartData(state, payload) {
-            state.linksChartData = payload;
+          /*  console.info("payload------------",payload.chart.pastDaysList)
+            console.info("payload------------",payload.chart.pv)*/
+                state.linksChartData.chart.day = payload.chart.pastDaysList;
+                state.linksChartData.chart.num = payload.chart.pv;
         },
-        setHotSearchData(state, payload) {
-            state.hotSearchData = payload;
-        },
-        setHotTagsData(state, payload) {
-            state.hotTagsData = payload;
-        },
-        setArticleHitData(state, payload) {
-            state.articleHitData = payload;
-        },
-        setWorksHitData(state, payload) {
-            state.worksHitData = payload;
+        setMapChartData(state, payload) {
+            state.mapChartData = payload;
+            //console.info("mapChartData------------",payload.pv)
         },
     },
     actions: {
-        async queryArticleChartData({ commit }) {
+        async queryUserChartData({ commit }) {
             try {
-                const response: ResponseData = await dailynewArticles();
-                const { data } = response;
-                commit('setArticleChartData', {
-                    ...initState.articleChartData,
-                    ...data,
+                const response: ResponseData = await dailynewUsers();
+                const { count } = response;
+                commit('setUserChartData', {
+                    ...initState.userChartData,
+                    count,
                 });
                 return true;
             } catch (error) {
                 return false;
             }
         },
-        async queryWorksChartData({ commit }) {
+        async queryRoleChartData({ commit }) {
             try {
-                const response: ResponseData = await weeknewWorks();
-                const { data } = response;
-                commit('setWorksChartData', {
-                    ...initState.worksChartData,
-                    ...data,
+                const response: ResponseData = await dailynewRole();
+                const { count } = response;
+                commit('setRoleChartData', {
+                    ...initState.roleChartData,
+                    count,
                 });
                 return true;
             } catch (error) {
                 return false;
             }
         },
-        async queryTopicsChartData({ commit }) {
+        async queryMenuChartData({ commit }) {
             try {
-                const response: ResponseData = await monthnewTopics();
+                const response: ResponseData = await dailynewMenu();
                 const { data } = response;
-                commit('setTopicsChartData', {
-                    ...initState.topicsChartData,
-                    ...data,
+                commit('setMenuChartData', {
+                    ...initState.menuChartData,
+                    count: data.menuCount,
                 });
                 return true;
             } catch (error) {
                 return false;
             }
         },
+
+        async queryLogsChartData({ commit }) {
+            try {
+                const response: ResponseData = await dailynewLogs();
+                const { count } = response;
+                commit('setLogsChartData', {
+                    ...initState.logsChartData,
+                    count:count,
+                });
+                return true;
+            } catch (error) {
+                return false;
+            }
+        },
+
         async queryLinksChartData({ commit }) {
             try {
                 const response: ResponseData = await annualnewLinks();
                 const { data } = response;
                 commit('setLinksChartData', {
                     ...initState.linksChartData,
-                    ...data,
+                    chart:data,
                 });
                 return true;
             } catch (error) {
                 return false;
             }
         },
-        async queryHotSearchData({ commit }, payload: TableListQueryParams) {
-            try {       
-                const response: ResponseData = await hotSearchQueryList(payload);
+
+
+        async queryMapChartData({ commit }) {
+            try {
+                const response: ResponseData = await pvprovinceQueryList();
                 const { data } = response;
-                commit('setHotSearchData',{
-                    ...initState.hotSearchData,
-                    list: data.list || [],
-                    pagination: {
-                        ...initState.hotSearchData.pagination,
-                        current: payload.page,
-                        total: data.total || 0,
-                    },
-                })        
+                commit('setMapChartData',{
+                    ...initState.mapChartData,
+                    pv: data.pv || [],
+                })
                 return true;
             } catch (error) {
                 return false;
             }
         },
-        async queryHotTagsData({ commit }, payload: TableListQueryParams) {
-            try {    
-                const response: ResponseData = await hotTagsQueryList(payload);
-                const { data } = response;
-                commit('setHotTagsData',{
-                    ...initState.hotTagsData,
-                    list: data.list || [],
-                    pagination: {
-                        ...initState.hotTagsData.pagination,
-                        current: payload.page,
-                        total: data.total || 0,
-                    },
-                })        
-                return true;
-            } catch (error) {
-                return false;
-            }
-        },
-        async queryArticleHitData({ commit }, payload: TableListQueryParams) {
-            try {   
-                const response: ResponseData = await articleHitQueryList(payload);
-                const { data } = response;
-                commit('setArticleHitData',{
-                    ...initState.articleHitData,
-                    list: data.list || [],
-                    pagination: {
-                        ...initState.articleHitData.pagination,
-                        current: payload.page,
-                        total: data.total || 0,
-                    },
-                })        
-                return true;
-            } catch (error) {
-                return false;
-            }
-        },
-        async queryWorksHitData({ commit }, payload: TableListQueryParams) {
-            try {    
-                const response: ResponseData = await worksHitQueryList(payload);
-                const { data } = response;
-                commit('setWorksHitData',{
-                    ...initState.worksHitData,
-                    list: data.list || [],
-                    pagination: {
-                        ...initState.worksHitData.pagination,
-                        current: payload.page,
-                        total: data.total || 0,
-                    },
-                })        
-                return true;
-            } catch (error) {
-                return false;
-            }
-        },
+
 
 
     }
 }
 
 export default StoreModel;
-  

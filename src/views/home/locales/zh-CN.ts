@@ -1,4 +1,5 @@
 export default {
+  'page.home.text-immediate': '即时',
   'page.home.text-day': '日',
   'page.home.text-week': '周',
   'page.home.text-month': '月',
@@ -6,11 +7,14 @@ export default {
   'page.home.text-total': '总数量',
   'page.home.text-daycompare': '日同比',
   'page.home.text-weekcompare': '周同比',
-  'page.home.articlechartcard.card-title': '随笔',
+  'page.home.userechartcard.card-title': '用户统计',
+  'page.home.rolechartcard.card-title': '角色统计',
+  'page.home.menuchartcard.card-title': '菜单统计',
+  'page.home.logschartcard.card-title': '日志统计',
   'page.home.workschartcard.card-title': '作品',
   'page.home.topicschartcard.card-title': '专题',
-  'page.home.linkschartcard.card-title': '左邻右舍',
-
+  'page.home.linkschartcard.card-title': '报表统计(近15天日流量)',
+  'page.home.mapchartcard.card-title': '用户归属地',
   'page.home.hotsearchcard.card-title': '热门搜索',
   'page.home.hotsearchcard.card.table-column-number': '序号',
   'page.home.hotsearchcard.card.table-column-name': '关键词',

@@ -1,23 +1,17 @@
 <template>
       <el-card shadow="never" class="cus-card homeBoxCard" v-loading="loading">
           <template #header>
-            <span>{{t('page.home.articlechartcard.card-title')}}</span>
-            <el-tag class="float-right">{{t('page.home.text-day')}}</el-tag>
+            <span>{{t('page.home.userechartcard.card-title')}}</span>
+            <el-tag class="float-right">{{t('page.home.text-immediate')}}</el-tag>
           </template>
-          <div class="num">{{visitData.num.toLocaleString()}}</div>
+          <div class="num">{{visitData.count.toLocaleString()}}</div>
           <div class="height40">
-            <div class="articleText">
+            <div class="UserText">
                 <span>
-                {{t('page.home.text-daycompare')}}
-                {{Math.abs(visitData.day)}}%
-                    <i class="el-icon-caret-top colored4014" v-if="visitData.day > 0" ></i>
-                    <i v-else class="el-icon-caret-bottom color19be6b" ></i>
+
                 </span>
                 <span class="margin-l10">
-                {{t('page.home.text-weekcompare')}}
-                {{Math.abs(visitData.week)}}%
-                    <i class="el-icon-caret-top colored4014" v-if="visitData.week > 0" ></i>
-                    <i v-else class="el-icon-caret-bottom color19be6b" ></i>
+
                 </span>
             </div>
           </div>
@@ -25,7 +19,7 @@
           <el-row>
             <el-col :span="12">{{t('page.home.text-total')}}</el-col>
             <el-col class="text-align-right" :span="12">
-                {{visitData.total.toLocaleString()}}
+                {{visitData.count.toLocaleString()}}
             </el-col>
           </el-row>
       </el-card>
@@ -34,39 +28,39 @@
 import { computed, defineComponent, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useI18n } from "vue-i18n";
-import { ArticleChartDataType } from "../../data.d";
+import { UserChartDataType } from "../../data.d";
 import { StateType as HomeStateType } from "../../store";
 
-interface ArticleChartCardSetupData {
+interface UserChartCardSetupData {
     t: Function;
     loading: boolean;
-    visitData: ArticleChartDataType;
+    visitData: UserChartDataType;
 }
 
 export default defineComponent({
-    name: 'ArticleChartCard',
-    setup(): ArticleChartCardSetupData {
+    name: 'UserChartCard',
+    setup(): UserChartCardSetupData {
         const store = useStore<{ Home: HomeStateType}>();
         const { t } = useI18n();
 
         // 数据
-        const visitData = computed<ArticleChartDataType>(()=> store.state.Home.articleChartData);
+        const visitData = computed<UserChartDataType>(()=> store.state.Home.userChartData);
         // 读取数据 func
         const loading = ref<boolean>(true);
         const getData = async () => {
             loading.value = true;
-            await store.dispatch('Home/queryArticleChartData');
+            await store.dispatch('Home/queryUserChartData');
             loading.value = false;
         }
 
         onMounted(()=> {
-           // getData();
+           getData();
         })
 
         return {
             t,
             loading: loading as unknown as boolean,
-            visitData: visitData as unknown as ArticleChartDataType
+            visitData: visitData as unknown as UserChartDataType
         }
     }
 })
@@ -93,7 +87,7 @@ export default defineComponent({
   .height40 {
     height: 40px;
   }
-  .articleText {
+  .UserText {
     padding-top: 20px;
   }
   .color19be6b {

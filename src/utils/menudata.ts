@@ -101,3 +101,36 @@ export function generateLeftAndTopMenusTree<T>(dataMenus: Array<T>): Array<Route
   return menusList;
 }
 
+// 获取子菜单函数-角色管理右边列表使用
+export function  getRightChildren(array: any) {
+  const menuChildren: any = [];
+  for (const arr of array) {//循环获取子节点
+    const child= {
+      id: arr.id,
+      label: `${ arr.name }`,
+      children: []
+    }
+    if(arr.children.length > 0){
+      child.children =getRightChildren(arr.children)
+    }
+    menuChildren.push(child);
+  }
+  return menuChildren;
+}
+
+// 自定义生成树形菜单结果函数-角色管理右边列表使用
+export function  generateRightMenusTree(dataMenus: any){ //遍历树  获取id数组
+  const menusList: any = [];
+  for(const i in dataMenus){
+    if(dataMenus[i].parentId==null){ //判断是否为顶层节点
+      const parentMenu= {
+        id: dataMenus[i].id,
+        label: `${ dataMenus[i].name }`,
+        children: []
+      }
+      parentMenu.children = getRightChildren(dataMenus[i].children)
+      menusList.push(parentMenu);
+    }
+  }
+  return menusList;
+}

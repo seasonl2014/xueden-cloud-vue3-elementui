@@ -2,16 +2,25 @@
 
       <el-card shadow="never" class="cus-card homeBoxCard" v-loading="loading">
           <template #header>
-            <span>{{t('page.home.workschartcard.card-title')}}</span>
-            <el-tag type="success" class="float-right">{{t('page.home.text-week')}}</el-tag>
+            <span>{{t('page.home.rolechartcard.card-title')}}</span>
+            <el-tag type="success" class="float-right">{{t('page.home.text-immediate')}}</el-tag>
           </template>
-          <div class="num">{{num.toLocaleString()}}</div>
-          <div class="height40" ref="worksChartRef" />
+          <div class="num">{{count.toLocaleString()}}</div>
+        <div class="height40">
+          <div class="UserText">
+                <span>
+
+                </span>
+            <span class="margin-l10">
+
+                </span>
+          </div>
+        </div>
           <el-divider />
           <el-row>
             <el-col :span="12">{{t('page.home.text-total')}}</el-col>
             <el-col class="text-align-right" :span="12">
-              {{total.toLocaleString()}}
+              {{count.toLocaleString()}}
             </el-col>
           </el-row>
       </el-card>
@@ -78,68 +87,39 @@ const worksChartOption: EChartOption = {
   ],
 };
 
-interface WorksChartCardSetupData {
+interface RoleChartCardSetupData {
     t: Function;
     loading: boolean;
-    worksChartRef: Ref;
-    total: number;
-    num: number;
+    count: number;
 }
 
 export default defineComponent({
     name: 'WorksChartCard',
-    setup(): WorksChartCardSetupData {
+    setup(): RoleChartCardSetupData {
         const store = useStore<{ Home: HomeStateType}>();
         const { t } = useI18n();
 
         // 总数
-        const total = computed<number>(() => store.state.Home.worksChartData.total);
-        // num
-        const num = computed<number>(() => store.state.Home.worksChartData.num);
-        // chart Data
-        const chartData = computed<ChartDataType>(()=> store.state.Home.worksChartData.chart);
+        const total = computed<number>(() => store.state.Home.roleChartData.count);
 
-        // echarts 图表
-        const worksChartRef = ref<HTMLDivElement>();
-        const echarts = useEcharts(worksChartRef, worksChartOption);
-        watch([echarts, chartData],()=> {
-          if(echarts.value) {
-              const option: EChartOption = {
-                xAxis: {
-                  // data: ["03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01"]
-                  data: chartData.value.day,
-                },
-                series: [
-                  {
-                    name: '新增',
-                    // data: [3, 1, 1, 2, 2, 2, 2]
-                    data: chartData.value.num,
-                  },
-                ],
-              };
-              echarts.value.setOption(option);
-          }
-        });
 
         // 读取数据 func
         const loading = ref<boolean>(true);
         const getData = async () => {
             loading.value = true;
-            await store.dispatch('Home/queryWorksChartData');
+            await store.dispatch('Home/queryRoleChartData');
             loading.value = false;
         };
 
         onMounted(()=> {
-           // getData();
+           getData();
         });
 
 
         return {
             t,
             loading: loading as unknown as boolean,
-            worksChartRef,
-            total: total as unknown as number,
-            num: num as unknown as number,
+            count: total as unknown as number,
         }
     }
 })

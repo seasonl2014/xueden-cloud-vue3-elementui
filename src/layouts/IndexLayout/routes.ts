@@ -17,13 +17,7 @@ const IndexLayoutRoutes: Array<RoutesDataItem> = [
         component: ()=> import('@/views/home/index.vue')
       },
       {
-        icon: 'detail',
-        title: 'index-layout.menu.roles.all',
-        path: 'all',
-        component: ()=> import('@/views/roles/all/index.vue'),
-      },
-      {
-        icon: 'detail',
+        icon: 'video',
         title: 'index-layout.menu.home.video',
         path: 'http://java.goodym.cn/html/1610442125958.html',
         belongTopMenu: '/home',
@@ -64,35 +58,6 @@ const IndexLayoutRoutes: Array<RoutesDataItem> = [
   },*/
 
 
- /* {
-    icon: 'permissions',
-    title: 'index-layout.menu.role',
-    path: '/role',
-    redirect: '/role/all',
-    component: BlankLayout,
-    children: [
-      {
-        icon: 'detail',
-        title: 'index-layout.menu.role.all',
-        path: 'all',
-        component: ()=> import('@/views/role/all/index.vue'),
-      },
-      {
-        icon: 'detail',
-        role: ['user'],
-        title: 'index-layout.menu.role.user',
-        path: 'user',
-        component: ()=> import('@/views/role/user/index.vue'),
-      },
-      {
-        icon: 'detail',
-        role: ['test'],
-        title: 'index-layout.menu.role.test',
-        path: 'test',
-        component: ()=> import('@/views/role/test/index.vue'),
-      },
-    ],
-  },*/
 
 ];
 
