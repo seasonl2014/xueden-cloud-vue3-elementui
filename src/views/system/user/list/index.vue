@@ -89,8 +89,8 @@
             prop="action"
             width="150">
             <template #default="{row}">
-                <el-button type="text" @click="() => detailUpdateData(row.id)" :loading="detailUpdateLoading.includes(row.id)">编辑</el-button>
-                <el-button type="text"  @click="() => deleteTableData(row.id)" :loading="deleteLoading.includes(row.id)">删除</el-button>
+                <el-button v-permission="'sys:user:edit'" type="text" @click="() => detailUpdateData(row.id)" :loading="detailUpdateLoading.includes(row.id)">编辑</el-button>
+                <el-button v-permission="'sys:user:delete'" type="text"  @click="() => deleteTableData(row.id)" :loading="deleteLoading.includes(row.id)">删除</el-button>
             </template>
         </el-table-column>
 
@@ -127,7 +127,7 @@ import UpdateForm from './components/UpdateForm.vue';
 import { StateType as ListStateType } from "./store";
 import { PaginationConfig, TableListItem } from './data.d';
 import {ResponseData} from "@/utils/request";
-
+import vPermission from '@/directives/permission';
 interface ListUserTablePageSetupData {
     list: TableListItem[];
     pagination: PaginationConfig;
@@ -158,6 +158,9 @@ export default defineComponent({
         ScreenTable,
         CreateForm,
         UpdateForm
+    },
+    directives: {
+      permission: vPermission
     },
     setup(): ListUserTablePageSetupData {
 

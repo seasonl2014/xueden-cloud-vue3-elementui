@@ -69,7 +69,7 @@ const initState: StateType = {
     },
     mapChartData: {
         pv: []
-        },
+    },
 
 };
 

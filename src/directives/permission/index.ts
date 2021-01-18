@@ -14,13 +14,16 @@
  */
 import { Directive } from "vue";
 import UserModel from "@/store/user";
-import { hasPermissionRouteRoles } from "@/utils/routes";
+import { hasPermissionRouteMenu } from "@/utils/routes";
 
 const permission: Directive = (el, binding, vnode, prevVNode) => {
-    const { value } = binding;    
+    const { value } = binding;
     if(value) {
-        const userRoles = UserModel.state.currentUser.roles;
-        if(!hasPermissionRouteRoles(userRoles, value)){
+        //const userRoles = UserModel.state.currentUser.roles;
+        // 获取用户所具有的菜单权限标志
+        const userPermissions = UserModel.state.currentUser.permissions;
+        // console.info("用户所具有的菜单权限标志",userPermissions)
+        if(!hasPermissionRouteMenu(userPermissions, value)){
             el.parentNode && el.parentNode.removeChild(el);
         }
     } else {

@@ -21,11 +21,11 @@
       </el-col>
     </el-row>
 
-    <el-row :gutter="24">
+   <!-- <el-row :gutter="24">
       <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         <MapChartCard />
       </el-col>
-    </el-row>
+    </el-row>-->
   </div>
 </template>
 
@@ -70,8 +70,8 @@ export default defineComponent({
     RoleChartCard,
     MenuChartCard,
     LogsChartCard,
-    LinksChartCard,
-    MapChartCard
+    LinksChartCard
+
   }
 
 });

@@ -29,9 +29,9 @@
                     {{t('page.user.login.form.btn-submit')}}
                 </el-button>
                 <div class="text-align-right">
-                    <router-link to="/user/register">
-                        {{t('page.user.login.form.btn-jump')}}
-                    </router-link>
+                    <a target="_blank" href="http://java.goodym.cn/html/1610442125958.html">
+                        在线视频教程
+                    </a>
                 </div>
             </el-form-item>
 

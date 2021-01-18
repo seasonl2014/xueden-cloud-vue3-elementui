@@ -78,8 +78,7 @@ export default defineComponent({
         const { t } = useI18n();
 
         // chart Data
-        const chartData = computed<ChartDataType>(()=> store.state.Home.linksChartData.chart);
-        //console.info("chartData:",chartData)
+        const chartData: ChartDataType = store.state.Home.linksChartData.chart
         // echarts 图表
         const linksChartRef = ref<HTMLDivElement>();
         const echarts = useEcharts(linksChartRef, linksChartOption);
@@ -89,13 +88,13 @@ export default defineComponent({
                 xAxis: {
                   type: 'category',
                   // data: ["03-01", "03-01", "03-01", "03-01", "03-01", "03-01", "03-01"]
-                  data: chartData.value.day,
+                  data: chartData.day,
                 },
                 series: [
                   {
                     name: '新增',
                     // data: [3, 1, 1, 2, 2, 2, 2]
-                    data: chartData.value.num,
+                    data: chartData.num,
                   },
                 ],
               };

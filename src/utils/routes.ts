@@ -240,6 +240,31 @@ export const vueRoutes = (routesData: RoutesDataItem[], parentPath = '/', headSt
 };
 
 
+/**
+ * 根据 自定义传入权限名 判断当前用户是否有权限
+ * @param userPermissions 用户的菜单权限
+ * @param permissions 自定义菜单权限名
+ */
+export const hasPermissionRouteMenu = (userPermissions: string[], permissions?: string | string[]): boolean => {
+
+  // 不设置权限，直接放行
+  if(typeof permissions === 'undefined') {
+    return true;
+  }
+
+  // 自定义的是字符串
+  if (typeof permissions === 'string') {
+    return userPermissions.includes(permissions);
+  }
+
+  // 自定义的是字符串
+  if(permissions instanceof Array && permissions.length > 0) {
+    return permissions.some(permission => userPermissions.includes(permission));
+  }
+
+  return false;
+};
+
 
 /**
  * 根据 自定义传入权限名 判断当前用户是否有权限

@@ -28,10 +28,6 @@ export interface LinksChartDataType {
   chart: ChartDataType;
 }
 
-
-
-
 export interface MapChartDataType {
-  pv: any[];
+  pv: object[];
 }
-
