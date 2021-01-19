@@ -17,6 +17,12 @@ const IndexLayoutRoutes: Array<RoutesDataItem> = [
         component: ()=> import('@/views/home/index.vue')
       },
       {
+        icon: 'map',
+        title: 'index-layout.menu.home.map',
+        path: 'map',
+        component: ()=> import('@/views/home/components/MapChartCard/index.vue')
+      },
+      {
         icon: 'video',
         title: 'index-layout.menu.home.video',
         path: 'http://java.goodym.cn/html/1610442125958.html',
@@ -36,22 +42,22 @@ const IndexLayoutRoutes: Array<RoutesDataItem> = [
           {
             title: 'index-layout.menu.system.list.user',
             path: 'user',
-            component: ()=> import('@/views/system/user/list/index.vue'),
+            component: ()=> import('@/views/system/user/list/index2.vue'),
           },
           {
             title: 'index-layout.menu.system.list.role',
             path: 'role',
-            component: ()=> import('@/views/system/role/list/index.vue'),
+            component: ()=> import('@/views/system/role/list/index2.vue'),
           },
           {
             title: 'index-layout.menu.system.list.menu',
             path: 'menu',
-            component: ()=> import('@/views/system/menu/list/index.vue'),
+            component: ()=> import('@/views/system/menu/list/index2.vue'),
           },
           {
             title: 'index-layout.menu.system.list.log',
             path: 'log',
-            component: ()=> import('@/views/system/log/list/index.vue'),
+            component: ()=> import('@/views/system/log/list/index2.vue'),
           },
 
     ],

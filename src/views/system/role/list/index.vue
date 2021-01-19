@@ -8,7 +8,7 @@
           <template #header>
               <el-row>
                     <el-col :span="8">
-                        <el-button type="primary" @click="() => setCreateFormVisible(true)">新增</el-button>
+                        <el-button v-permission="'sys:role:add'" type="primary" @click="() => setCreateFormVisible(true)">新增</el-button>
                     </el-col>
                     <el-col :span="16" class="text-align-right">
                         <el-input v-model="searchVal" style="width:200px;margin-left: 16px;" placeholder="请输入角色名称">
@@ -71,8 +71,8 @@
                     prop="action"
                     width="150">
                     <template #default="{row}">
-                        <el-button type="text" @click="() => detailUpdateData(row.id)" :loading="detailUpdateLoading.includes(row.id)">编辑</el-button>
-                        <el-button type="text"  @click="() => deleteTableData(row.id)" :loading="deleteLoading.includes(row.id)">删除</el-button>
+                        <el-button v-permission="'sys:role:edit'" type="text" @click="() => detailUpdateData(row.id)" :loading="detailUpdateLoading.includes(row.id)">编辑</el-button>
+                        <el-button v-permission="'sys:role:delete'" type="text"  @click="() => deleteTableData(row.id)" :loading="deleteLoading.includes(row.id)">删除</el-button>
                     </template>
                 </el-table-column>
 
@@ -118,7 +118,7 @@
               <el-tooltip class="item" effect="dark" content="选择指定角色分配菜单" placement="top">
                 <span class="role-span">菜单分配</span>
               </el-tooltip>
-              <el-button
+              <el-button v-permission="'sys:role:edit'"
                   type="primary"
                   style="float: right; padding: 6px 9px"
                   @click="saveMenuSubmit"
@@ -149,7 +149,7 @@ import UpdateForm from './components/UpdateForm.vue';
 import { StateType as ListStateType } from "./store";
 import { PaginationConfig, TableListItem,RoleMenusDataItem } from './data.d';
 import {ResponseData} from "@/utils/request";
-
+import vPermission from '@/directives/permission';
 interface ListTablePageSetupData {
     list: TableListItem[];
     pagination: PaginationConfig;
@@ -186,6 +186,9 @@ export default defineComponent({
     components: {
         CreateForm,
         UpdateForm
+    },
+    directives: {
+      permission: vPermission
     },
     setup(): ListTablePageSetupData {
       // 定义搜索关键词

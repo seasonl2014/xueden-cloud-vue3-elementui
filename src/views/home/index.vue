@@ -57,7 +57,7 @@ const LinksChartCard = defineAsyncComponent({
 });
 
 const MapChartCard = defineAsyncComponent({
-  loader:  () => import('./components/MapChartCard/index.vue'),
+  loader:  () => import('./components/MapChartCard/index2.vue'),
   loadingComponent: PageLoading
 });
 

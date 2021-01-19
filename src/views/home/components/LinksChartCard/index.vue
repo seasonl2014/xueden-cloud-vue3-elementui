@@ -32,7 +32,7 @@ const linksChartOption: EChartOption = {
     },
   },
   grid: {
-    left: '0',
+    left: '40px',
     right: '0',
     top: '40px',
     bottom: '20px',

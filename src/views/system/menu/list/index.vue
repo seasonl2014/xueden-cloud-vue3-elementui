@@ -16,7 +16,7 @@
         <template #header>
             <el-row>
                     <el-col :span="8">
-                        <el-button type="primary" @click="createFormGetMenuData">新增</el-button>
+                        <el-button v-permission="'sys:menu:add'" type="primary" @click="createFormGetMenuData">新增</el-button>
                     </el-col>
             </el-row>
         </template>
@@ -87,8 +87,8 @@
             prop="action"
             width="150">
             <template #default="{row}">
-                <el-button type="text" @click="() => detailUpdateData(row.id)" :loading="detailUpdateLoading.includes(row.id)">编辑</el-button>
-                <el-button type="text"  @click="() => deleteTableData(row.id)" :loading="deleteLoading.includes(row.id)">删除</el-button>
+                <el-button v-permission="'sys:menu:edit'" type="text" @click="() => detailUpdateData(row.id)" :loading="detailUpdateLoading.includes(row.id)">编辑</el-button>
+                <el-button v-permission="'sys:menu:delete'" type="text"  @click="() => deleteTableData(row.id)" :loading="deleteLoading.includes(row.id)">删除</el-button>
             </template>
         </el-table-column>
 
@@ -135,7 +135,7 @@ import SearchDrawer from './components/SearchDrawer.vue';
 import IconSvg from '@/components/IconSvg';
 import { StateType as ListStateType } from "./store";
 import { PaginationConfig, TableListItem } from './data.d';
-
+import vPermission from '@/directives/permission';
 interface MenuListTableSetupData {
     list: TableListItem[];
     menusData: TableListItem[];
@@ -171,6 +171,9 @@ export default defineComponent({
         UpdateForm,
         SearchDrawer,
         IconSvg
+    },
+    directives: {
+      permission: vPermission
     },
     setup(): MenuListTableSetupData {
 

@@ -46,15 +46,8 @@
           <template #header>
               <el-row>
                     <el-col :span="8">
-                        <el-button type="danger" @click="() => deleteBatchTableData()">批量删除</el-button>
+                        <el-button v-permission="'sys:log:delete'" type="danger" @click="() => deleteBatchTableData()">批量删除</el-button>
                     </el-col>
-                    <!--<el-col :span="16" class="text-align-right">
-                        <el-radio-group v-model="tabVal">
-                            <el-radio-button label="all">全部</el-radio-button>
-                            <el-radio-button label="header">头部</el-radio-button>
-                            <el-radio-button label="footer">底部</el-radio-button>
-                        </el-radio-group>
-                    </el-col>-->
             </el-row>
           </template>
 
@@ -149,7 +142,7 @@
                     prop="action"
                     width="70">
                     <template #default="{row}">
-                        <el-button type="danger" plain  @click="() => deleteTableData(row.id)" :loading="deleteLoading.includes(row.id)">删除</el-button>
+                        <el-button v-permission="'sys:log:delete'" type="danger" plain  @click="() => deleteTableData(row.id)" :loading="deleteLoading.includes(row.id)">删除</el-button>
                     </template>
                 </el-table-column>
 
@@ -179,7 +172,7 @@ import TypeSelect from './components/TypeSelect.vue';
 import RequestSelect from './components/RequestSelect.vue';
 import { StateType as ListStateType } from "./store";
 import { PaginationConfig, TableListItem } from './data.d';
-
+import vPermission from '@/directives/permission';
 interface ListSearchTablePageSetupData {
     list: TableListItem[];
     pagination: PaginationConfig;
@@ -204,6 +197,9 @@ export default defineComponent({
     components: {
         TypeSelect,
         RequestSelect
+    },
+    directives: {
+      permission: vPermission
     },
     setup(): ListSearchTablePageSetupData {
 

@@ -16,7 +16,7 @@
         <template #header>
             <el-row>
                     <el-col :span="8">
-                        <el-button type="primary" @click="() => setCreateFormVisible(true)">新增</el-button>
+                        <el-button v-permission="'sys:user:add'" type="primary" @click="() => setCreateFormVisible(true)">新增</el-button>
                     </el-col>
                     <el-col :span="16" class="text-align-right">
                         <el-input v-model="searchVal" style="width:200px;margin-left: 16px;" placeholder="请输入登录名/邮箱/手机号">
